@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'profile_page.dart';
 
 void main() {
@@ -14,9 +15,7 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Profil Daffa',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.blueAccent,
-        ),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueAccent),
         useMaterial3: true,
       ),
       home: const ProfilePage(),
