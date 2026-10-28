@@ -21,7 +21,67 @@ class ProfilePage extends StatelessWidget {
           children: [
             const ProfileAvatar(),
             const SizedBox(height: 16),
+
             ProfileInfo(userName: userName, role: role),
+
+            const SizedBox(height: 24),
+
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+              decoration: BoxDecoration(
+                color: Colors.blue.shade50,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Column(
+                    children: [
+                      const Text(
+                        '3',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blueAccent,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      const Text('Proyek'),
+                    ],
+                  ),
+
+                  Column(
+                    children: [
+                      const Text(
+                        '12',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blueAccent,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      const Text('Followers'),
+                    ],
+                  ),
+
+                  Column(
+                    children: [
+                      const Text(
+                        '8',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blueAccent,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      const Text('Following'),
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
