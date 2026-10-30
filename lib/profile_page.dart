@@ -17,20 +17,29 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Profil Pengguna'),
-        centerTitle: true,
-        backgroundColor: Colors.blueAccent,
-        foregroundColor: Colors.white,
-      ),
+      appBar: AppBar(title: const Text('My Profile'), centerTitle: true),
       body: Padding(
-        padding: const EdgeInsets.all(24),
+        padding: const EdgeInsets.all(24.0),
         child: Column(
           children: [
             const ProfileAvatar(),
             const SizedBox(height: 16),
 
-            ProfileInfo(userName: userName, role: role),
+            ProfileInfo(name: userName, role: role),
+
+            const SizedBox(height: 16),
+
+            ElevatedButton.icon(
+              onPressed: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Fitur edit profil belum tersedia.'),
+                  ),
+                );
+              },
+              icon: const Icon(Icons.edit),
+              label: const Text('Edit Profil'),
+            ),
 
             const SizedBox(height: 24),
             const ProfileStats(),
@@ -40,7 +49,7 @@ class ProfilePage extends StatelessWidget {
               alignment: Alignment.centerLeft,
               child: Text(
                 'Proyek Saya',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
 
@@ -68,33 +77,30 @@ class ProfileAvatar extends StatelessWidget {
   Widget build(BuildContext context) {
     return const CircleAvatar(
       radius: 50,
-      backgroundColor: Colors.grey,
+      backgroundColor: Colors.blueAccent,
       child: Icon(Icons.person, size: 50, color: Colors.white),
     );
   }
 }
 
 class ProfileInfo extends StatelessWidget {
-  final String userName;
+  final String name;
   final String role;
 
-  const ProfileInfo({super.key, required this.userName, required this.role});
+  const ProfileInfo({super.key, required this.name, required this.role});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Text(
-          userName,
-          textAlign: TextAlign.center,
+          name,
           style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
         ),
-        const SizedBox(height: 8),
-        Text(
-          role,
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 16, color: Colors.grey.shade700),
-        ),
+
+        const SizedBox(height: 4),
+
+        Text(role, style: const TextStyle(fontSize: 16, color: Colors.grey)),
       ],
     );
   }
@@ -112,17 +118,9 @@ class StatItem extends StatelessWidget {
       children: [
         Text(
           count,
-          style: const TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            color: Colors.blueAccent,
-          ),
+          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
-        const SizedBox(height: 4),
-        Text(
-          label,
-          style: TextStyle(fontSize: 14, color: Colors.grey.shade700),
-        ),
+        Text(label, style: const TextStyle(color: Colors.grey)),
       ],
     );
   }
@@ -133,20 +131,15 @@ class ProfileStats extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
-      decoration: BoxDecoration(
-        color: Colors.blue.shade50,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: const Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          StatItem(count: '3', label: 'Proyek'),
-          StatItem(count: '12', label: 'Followers'),
-          StatItem(count: '8', label: 'Following'),
-        ],
-      ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: const [
+        StatItem(count: '5', label: 'Projects'),
+
+        StatItem(count: '120', label: 'Followers'),
+
+        StatItem(count: '80', label: 'Following'),
+      ],
     );
   }
 }
