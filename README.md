@@ -8,7 +8,7 @@ Aplikasi profil sederhana yang dibuat menggunakan Flutter sebagai latihan pengem
 
 ## Ringkasan dari progres
 
-### Day 1 (Senin)
+### Day 1 (Selasa)
 
 **Commit 1**
 `feat: create basic profile page structure with avatar and text`
@@ -23,7 +23,7 @@ Aplikasi profil sederhana yang dibuat menggunakan Flutter sebagai latihan pengem
 - Memperbaiki nama file menjadi `profile_page.dart`.
 - Memisahkan avatar dan informasi profil menjadi widget tersendiri.
 
-### Day 2 (Selasa)
+### Day 2 (Rabu)
 
 **Commit 1**
 `feat: add profile statistics row`
@@ -37,7 +37,7 @@ Aplikasi profil sederhana yang dibuat menggunakan Flutter sebagai latihan pengem
 - Membuat widget ProfileStats.
 - Membuat widget StatItem agar komponen statistik dapat digunakan kembali.
 
-### Day 3 (Rabu)
+### Day 3 (Kamis)
 
 **Commit 1**
 `feat: add scrollable project list using ListView.builder`
@@ -51,7 +51,7 @@ Aplikasi profil sederhana yang dibuat menggunakan Flutter sebagai latihan pengem
 - Memisahkan tampilan setiap item proyek menjadi ExperienceCard.
 - Membuat struktur kode lebih modular.
 
-### Day 4 (Kamis)
+### Day 4 (Jumat)
 
 **Commit 1**
 `style: improve profile layout spacing and alignment`
@@ -65,3 +65,12 @@ Aplikasi profil sederhana yang dibuat menggunakan Flutter sebagai latihan pengem
 - Menambahkan tombol Edit Profil.
 - Menampilkan SnackBar ketika tombol ditekan.
 - Membuat dokumentasi README.md yang merangkum perkembangan proyek.
+
+### Day 5 (Minggu)
+
+**Commit 1**
+`feat: implement editable profile with documentation`
+
+- Menambahkan fungsi pada tombol Edit Profil.
+- Dapat edit nama dan pekerjaan melalui dialog.
+- Update README.md.

@@ -1,48 +1,150 @@
 import 'package:flutter/material.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
-  final String userName = 'Daffa Dermawan';
-  final String role = 'Mahasiswa Software Engineering';
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
 
+class _ProfilePageState extends State<ProfilePage> {
+  // Data profil
+  String userName = 'Daffa Dermawan';
+  String role = 'Mahasiswa Software Engineering';
+
+  // Controller untuk input edit profil
+  final TextEditingController nameController = TextEditingController();
+
+  final TextEditingController roleController = TextEditingController();
+
+  // Data proyek
   final List<String> projects = const [
     'Weather App',
     'Todo App',
     'Profil Flutter',
-    'Aplikasi Kasir',
-    'Aplikasi Manajemen Data',
+    'POS App',
+    'CRM',
   ];
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    roleController.dispose();
+    super.dispose();
+  }
+
+  // Fungsi untuk menampilkan dialog edit profil
+  void editProfile() {
+    // Mengisi input dengan data profil saat ini
+    nameController.text = userName;
+    roleController.text = role;
+
+    showDialog(
+      context: context,
+      builder: (dialogContext) {
+        return AlertDialog(
+          title: const Text('Edit Profil'),
+
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextField(
+                  controller: nameController,
+                  decoration: const InputDecoration(
+                    labelText: 'Nama',
+                    border: OutlineInputBorder(),
+                    prefixIcon: Icon(Icons.person),
+                  ),
+                ),
+
+                const SizedBox(height: 16),
+
+                TextField(
+                  controller: roleController,
+                  decoration: const InputDecoration(
+                    labelText: 'Pekerjaan',
+                    border: OutlineInputBorder(),
+                    prefixIcon: Icon(Icons.work),
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          actions: [
+            // Tombol batal
+            TextButton(
+              onPressed: () {
+                Navigator.pop(dialogContext);
+              },
+              child: const Text('Batal'),
+            ),
+
+            // Tombol simpan
+            ElevatedButton(
+              onPressed: () {
+                String newName = nameController.text.trim();
+                String newRole = roleController.text.trim();
+
+                // Memastikan input tidak kosong
+                if (newName.isEmpty || newRole.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Nama dan pekerjaan tidak boleh kosong.'),
+                    ),
+                  );
+                  return;
+                }
+
+                // Memperbarui data profil
+                setState(() {
+                  userName = newName;
+                  role = newRole;
+                });
+
+                Navigator.pop(dialogContext);
+
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Profil berhasil diperbarui!')),
+                );
+              },
+              child: const Text('Simpan'),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('My Profile'), centerTitle: true),
+
       body: Padding(
         padding: const EdgeInsets.all(24.0),
         child: Column(
           children: [
             const ProfileAvatar(),
+
             const SizedBox(height: 16),
 
             ProfileInfo(name: userName, role: role),
 
             const SizedBox(height: 16),
 
+            // Tombol Edit Profil
             ElevatedButton.icon(
-              onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Fitur edit profil belum tersedia.'),
-                  ),
-                );
-              },
+              onPressed: editProfile,
               icon: const Icon(Icons.edit),
               label: const Text('Edit Profil'),
             ),
 
             const SizedBox(height: 24),
+
             const ProfileStats(),
+
             const SizedBox(height: 24),
 
             const Align(
@@ -70,6 +172,7 @@ class ProfilePage extends StatelessWidget {
   }
 }
 
+// Widget Avatar Profil
 class ProfileAvatar extends StatelessWidget {
   const ProfileAvatar({super.key});
 
@@ -83,6 +186,7 @@ class ProfileAvatar extends StatelessWidget {
   }
 }
 
+// Widget Informasi Profil
 class ProfileInfo extends StatelessWidget {
   final String name;
   final String role;
@@ -106,6 +210,7 @@ class ProfileInfo extends StatelessWidget {
   }
 }
 
+// Widget Satu Item Statistik
 class StatItem extends StatelessWidget {
   final String count;
   final String label;
@@ -120,20 +225,22 @@ class StatItem extends StatelessWidget {
           count,
           style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
+
         Text(label, style: const TextStyle(color: Colors.grey)),
       ],
     );
   }
 }
 
+// Widget Statistik Profil
 class ProfileStats extends StatelessWidget {
   const ProfileStats({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return const Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: const [
+      children: [
         StatItem(count: '5', label: 'Projects'),
 
         StatItem(count: '120', label: 'Followers'),
@@ -144,6 +251,7 @@ class ProfileStats extends StatelessWidget {
   }
 }
 
+// Widget Item Proyek
 class ExperienceCard extends StatelessWidget {
   final String title;
 
