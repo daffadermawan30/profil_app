@@ -69,8 +69,13 @@ Aplikasi profil sederhana yang dibuat menggunakan Flutter sebagai latihan pengem
 ### Day 5 (Minggu)
 
 **Commit 1**
-`feat: implement editable profile with documentation`
+`feat: implement editable profile and update README.md`
 
 - Menambahkan fungsi pada tombol Edit Profil.
 - Dapat edit nama dan pekerjaan melalui dialog.
+- Update README.md.
+
+`feat: add editable profile with orange dark theme and update README.md`
+
+- Menjadikan profil jadi tema dark dengan warna oranye.
 - Update README.md.

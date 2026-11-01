@@ -8,22 +8,19 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  // Data profil
   String userName = 'Daffa Dermawan';
   String role = 'Mahasiswa Software Engineering';
 
-  // Controller untuk input edit profil
   final TextEditingController nameController = TextEditingController();
 
   final TextEditingController roleController = TextEditingController();
 
-  // Data proyek
   final List<String> projects = const [
     'Weather App',
     'Todo App',
-    'Profil Flutter',
+    'Profile Page Flutter',
     'POS App',
-    'CRM',
+    'CRM App',
   ];
 
   @override
@@ -33,9 +30,7 @@ class _ProfilePageState extends State<ProfilePage> {
     super.dispose();
   }
 
-  // Fungsi untuk menampilkan dialog edit profil
   void editProfile() {
-    // Mengisi input dengan data profil saat ini
     nameController.text = userName;
     roleController.text = role;
 
@@ -43,7 +38,11 @@ class _ProfilePageState extends State<ProfilePage> {
       context: context,
       builder: (dialogContext) {
         return AlertDialog(
-          title: const Text('Edit Profil'),
+          backgroundColor: const Color(0xFF1E1E1E),
+          title: const Text(
+            'Edit Profil',
+            style: TextStyle(color: Colors.orange, fontWeight: FontWeight.bold),
+          ),
 
           content: SingleChildScrollView(
             child: Column(
@@ -53,8 +52,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   controller: nameController,
                   decoration: const InputDecoration(
                     labelText: 'Nama',
-                    border: OutlineInputBorder(),
-                    prefixIcon: Icon(Icons.person),
+                    prefixIcon: Icon(Icons.person, color: Colors.orange),
                   ),
                 ),
 
@@ -64,8 +62,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   controller: roleController,
                   decoration: const InputDecoration(
                     labelText: 'Pekerjaan',
-                    border: OutlineInputBorder(),
-                    prefixIcon: Icon(Icons.work),
+                    prefixIcon: Icon(Icons.work, color: Colors.orange),
                   ),
                 ),
               ],
@@ -73,7 +70,6 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
 
           actions: [
-            // Tombol batal
             TextButton(
               onPressed: () {
                 Navigator.pop(dialogContext);
@@ -81,13 +77,12 @@ class _ProfilePageState extends State<ProfilePage> {
               child: const Text('Batal'),
             ),
 
-            // Tombol simpan
             ElevatedButton(
               onPressed: () {
                 String newName = nameController.text.trim();
+
                 String newRole = roleController.text.trim();
 
-                // Memastikan input tidak kosong
                 if (newName.isEmpty || newRole.isEmpty) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
@@ -97,7 +92,6 @@ class _ProfilePageState extends State<ProfilePage> {
                   return;
                 }
 
-                // Memperbarui data profil
                 setState(() {
                   userName = newName;
                   role = newRole;
@@ -120,7 +114,12 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('My Profile'), centerTitle: true),
+      appBar: AppBar(
+        title: const Text(
+          'My Profile',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+      ),
 
       body: Padding(
         padding: const EdgeInsets.all(24.0),
@@ -134,7 +133,6 @@ class _ProfilePageState extends State<ProfilePage> {
 
             const SizedBox(height: 16),
 
-            // Tombol Edit Profil
             ElevatedButton.icon(
               onPressed: editProfile,
               icon: const Icon(Icons.edit),
@@ -151,11 +149,15 @@ class _ProfilePageState extends State<ProfilePage> {
               alignment: Alignment.centerLeft,
               child: Text(
                 'Proyek Saya',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.orange,
+                ),
               ),
             ),
 
-            const Divider(),
+            const Divider(color: Colors.orange),
 
             Expanded(
               child: ListView.builder(
@@ -172,7 +174,6 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 }
 
-// Widget Avatar Profil
 class ProfileAvatar extends StatelessWidget {
   const ProfileAvatar({super.key});
 
@@ -180,13 +181,12 @@ class ProfileAvatar extends StatelessWidget {
   Widget build(BuildContext context) {
     return const CircleAvatar(
       radius: 50,
-      backgroundColor: Colors.blueAccent,
-      child: Icon(Icons.person, size: 50, color: Colors.white),
+      backgroundColor: Colors.orange,
+      child: Icon(Icons.person, size: 50, color: Colors.black),
     );
   }
 }
 
-// Widget Informasi Profil
 class ProfileInfo extends StatelessWidget {
   final String name;
   final String role;
@@ -210,7 +210,6 @@ class ProfileInfo extends StatelessWidget {
   }
 }
 
-// Widget Satu Item Statistik
 class StatItem extends StatelessWidget {
   final String count;
   final String label;
@@ -223,7 +222,11 @@ class StatItem extends StatelessWidget {
       children: [
         Text(
           count,
-          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          style: const TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Colors.orange,
+          ),
         ),
 
         Text(label, style: const TextStyle(color: Colors.grey)),
@@ -232,7 +235,6 @@ class StatItem extends StatelessWidget {
   }
 }
 
-// Widget Statistik Profil
 class ProfileStats extends StatelessWidget {
   const ProfileStats({super.key});
 
@@ -251,7 +253,6 @@ class ProfileStats extends StatelessWidget {
   }
 }
 
-// Widget Item Proyek
 class ExperienceCard extends StatelessWidget {
   final String title;
 
@@ -260,11 +261,15 @@ class ExperienceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 2,
       margin: const EdgeInsets.symmetric(vertical: 6),
       child: ListTile(
-        leading: const Icon(Icons.code, color: Colors.blueAccent),
+        leading: const Icon(Icons.code, color: Colors.orange),
         title: Text(title),
+        trailing: const Icon(
+          Icons.arrow_forward_ios,
+          size: 16,
+          color: Colors.orange,
+        ),
       ),
     );
   }
